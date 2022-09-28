@@ -20,7 +20,7 @@ async function getData() {
     try {
         const response = await fetch(URL);
         const result = await response.json();
-    
+
         moviesArray = result;
 
     } catch (error) {
@@ -68,7 +68,7 @@ function showCanvas(id){
 
     const movie = moviesArray.filter(movie => movie.id === id);
 
-    const { title, overview, genres } = movie[0];
+    const { title, overview, genres, budget, revenue, runtime, release_date } = movie[0];
 
     offCanvas.innerHTML += `
     <div class="offcanvas-header">
@@ -79,7 +79,21 @@ function showCanvas(id){
         <p class="text-secondary">${overview}</p>
     </div>
     <hr>
-    <div class="d-flex text-secondary p-3 gap-3" id="genres-container"></div>`
+    <div class="d-flex justify-content-between px-5">
+        <div class="d-flex text-secondary gap-3" id="genres-container"></div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                More
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li class="d-flex justify-content-between px-2 py-1"><span>Year:</span> ${new Date(release_date).getFullYear()}</li>
+                <li class="d-flex justify-content-between px-2 py-1"><span>Runtime:</span> ${runtime} mins</li>
+                <li class="d-flex justify-content-between px-2 py-1"><span>Budget:</span> $${budget}</li>
+                <li class="d-flex justify-content-between px-2 py-1 gap-1"><span>Revenue:</span> $${revenue}</li>
+            </ul>
+        </div>
+    </div>
+    `
 
     for(let genre of genres){
         document.getElementById('genres-container').innerHTML += `<p class="text-secondary">${genre.name}</p>`
