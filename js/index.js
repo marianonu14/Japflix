@@ -22,7 +22,6 @@ async function getData() {
         const result = await response.json();
 
         moviesArray = result;
-
     } catch (error) {
         console.log(error);
     }
@@ -34,8 +33,10 @@ btnBuscar.addEventListener('click', () => {
     const search = inputBuscar.value.toLowerCase();
 
     const filterArray = moviesArray.filter(({title, tagline, overview, genres}) => 
-        (title, tagline, overview).toLowerCase().includes(search) || 
-        genres.find(elem => elem.name.toLowerCase().includes(search))
+        title.toLowerCase().includes(search) || 
+        tagline.toLowerCase().includes(search) || 
+        overview.toLowerCase().includes(search) || 
+        genres.some(({name}) => name.toLowerCase().includes(search))
     )
 
     showMovies(filterArray);

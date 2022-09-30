@@ -1,3 +1,11 @@
+main {
+    min-height: calc(100vh - 100px);
+}
+
+li {
+    cursor: pointer;
+}
+
 .img-card-fit {
     object-fit: cover;
     width: 100%;
@@ -15,9 +23,6 @@
     overflow: auto;
 }
 
-main {
-    min-height: calc(100vh - 100px);
-  }
 
 .checked{
     color: orange;
@@ -25,8 +30,4 @@ main {
 
 .offcanvas-top{
     height: fit-content;
-}
-
-li {
-    cursor: pointer;
 }
