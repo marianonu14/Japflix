@@ -32,11 +32,11 @@ btnBuscar.addEventListener('click', () => {
 
     const search = inputBuscar.value.toLowerCase();
 
-    const filterArray = moviesArray.filter(({title, tagline, overview, genres}) => 
+    const filterArray = moviesArray.filter(({ title, tagline, overview, genres }) => 
         title.toLowerCase().includes(search) || 
         tagline.toLowerCase().includes(search) || 
         overview.toLowerCase().includes(search) || 
-        genres.some(({name}) => name.toLowerCase().includes(search))
+        genres.some(({ name }) => name.toLowerCase().includes(search))
     )
 
     showMovies(filterArray);
@@ -53,7 +53,7 @@ function showMovies(movies){
         const rate = Math.floor(vote_average/2)
 
         contenedor.innerHTML += `
-        <li onClick={showCanvas(${id})} class="d-flex justify-content-between mb-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+        <li onClick="showCanvas(${id})" class="d-flex justify-content-between mb-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
             <div>
                 <h2 class="text-white">${title}</h2>
                 <p class="text-secondary">${tagline}</p>
@@ -67,9 +67,9 @@ function showCanvas(id){
 
     offCanvas.innerHTML = ``;
 
-    const movie = moviesArray.filter(movie => movie.id === id);
+    const movie = moviesArray.find(movie => movie.id === id);
 
-    const { title, overview, genres, budget, revenue, runtime, release_date } = movie[0];
+    const { title, overview, genres, budget, revenue, runtime, release_date } = movie;
 
     offCanvas.innerHTML += `
     <div class="offcanvas-header">
